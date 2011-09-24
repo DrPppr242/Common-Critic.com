@@ -1,0 +1,9 @@
+# .rvmrc file for Common Critic project
+
+# If the gemset doesn't exist, create it
+rvm_gemset_create_on_use_flag=1
+# Switch back to rvm default when leaving directory
+rvm_project_rvmrc_default=1
+
+# Use ruby 1.9.2-p290 (MRI 1.9) with gemset common-critic.com
+rvm ruby-1.9.2-p290@common-critic.com
