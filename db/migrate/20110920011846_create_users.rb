@@ -3,12 +3,12 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :email
       t.string :salt
-      t.string :password
+      t.string :pass_hash
 
       t.timestamps
     end
 
-    add_index :users, :email
+    add_index :users, :email, :unique => true
   end
 
   def self.down
