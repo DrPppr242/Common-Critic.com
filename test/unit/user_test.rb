@@ -35,4 +35,14 @@ class UserTest < ActiveSupport::TestCase
     user.update_attribute(:password_confirmation, 'Pass1234')
     assert user.save, "Couldn't create user with good password and confirmation"
   end
+
+  test "should be able to authenticate" do
+    user = User.create(:email => 'user@site.com',
+                :password => 'Pass123',
+                :password_confirmation => 'Pass123')
+
+    assert !User.authenticate('joe@site.com', 'somepassword'), "Authenticated non-existent user"
+    assert !User.authenticate('user@site.com', 'badpassword'), "Authenticated with bad password"
+    assert_equal user, User.authenticate('user@site.com', 'Pass123'), "Wasn't able to authenticate"
+  end
 end
