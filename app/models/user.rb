@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :password
-  attr_accessible :email, :password, :salt, :password_confirmation
+  attr_accessible :email, :password, :salt, :password_confirmation, :name
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true,
                        :presence     => true,
                        :length       => { :minimum => 6 }
+
+  validates :name, :presence   => true,
+                   :uniqueness => { :case_senstive => false },
+                   :length     => { :within => 3..32 }
 
   validates :password_confirmation, :presence => true
   validates_confirmation_of :password, :message => "Passwords do not match"
